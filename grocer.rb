@@ -2,12 +2,6 @@ def find_item_by_name_in_collection(name, collection)
   # Implement me first!
   #
   # Consult README for inputs and outputs
-  counter = []
-  while counter < collection.length 
-   if collection[counter][:items]==name 
-     return collection[counter]
-  end 
-  counter += 1
 end
 
 def consolidate_cart(cart)
