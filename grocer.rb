@@ -113,4 +113,5 @@ def checkout(cart, coupons)	def checkout(cart, coupons)
     grand_total *= 0.90
   end
   grand_total
-end	end
+end	
+end
