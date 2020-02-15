@@ -46,6 +46,8 @@ def apply_coupons(cart, coupons)
         applicable_for_discount = find_item_by_name_in_collection( current_coupon[:item], cart )
         if ( applicable_for_discount[:count] / current_coupon[:num] >= 1 )
         cart.push( {:item => "#{current_coupon[:item]} W/COUPON",
+        :price => (current_coupon[:cost] / current_coupon[:num]).round(2),
+
 
 
 
