@@ -44,6 +44,8 @@ def apply_coupons(cart, coupons)
   while coupons_index < coupons.size do
         current_coupon = coupons[coupons_index]
         applicable_for_discount = find_item_by_name_in_collection( current_coupon[:item], cart )
+        if ( applicable_for_discount[:count] / current_coupon[:num] >= 1 )
+
 
 
 
