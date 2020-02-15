@@ -42,6 +42,8 @@ def apply_coupons(cart, coupons)
   # REMEMBER: This method **should** update cart
   
     coupons.each do |coupon|
+    item_info = find_item_by_name_in_collection(coupon[:item], cart)
+
 
 end
 
