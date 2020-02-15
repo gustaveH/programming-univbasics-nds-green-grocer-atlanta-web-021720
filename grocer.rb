@@ -100,6 +100,8 @@ def checkout(cart, coupons)
     grand_total += current_item_total
     index += 1
 end
+    if ( grand_total > 100 )
+
 
 
 end
