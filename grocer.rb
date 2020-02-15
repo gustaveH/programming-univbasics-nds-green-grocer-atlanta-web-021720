@@ -50,6 +50,8 @@ def apply_coupons(cart, coupons)
         		elsif item_info and item_info[:count] >= coupon[:num]
 
       cart << {
+        :item => coupon[:item] + " W/COUPON",
+
 
 
 end
