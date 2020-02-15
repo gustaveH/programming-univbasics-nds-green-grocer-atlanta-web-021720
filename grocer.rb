@@ -27,6 +27,8 @@ def consolidate_cart(cart)
         else
           new_cart << {
           :item => item_name,
+          :price => cart_item[:price],
+
 
 
 
