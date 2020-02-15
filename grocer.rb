@@ -1,107 +1,90 @@
-def find_item_by_name_in_collection(name, collection)
-  # Implement me first!
-  #
-  # Consult README for inputs and outputs
-    collection_index = 0
-      while collection_index < collection.size do
-    current_item = collection[collection_index]
-      if ( current_item[:item] == name )
-        return current_item
-      end 
-      collection_index += 1 
-    end 
-    nil
-end
-
 def consolidate_cart(cart)
-  # Consult README for inputs and outputs
-  #
-  # REMEMBER: This returns a new Array that represents the cart. Don't merely
-  # change `cart` (i.e. mutate) it. It's easier to return a new thing.
-  
-  updated_cart = Array.new 
-    cart_index = 0
-    
-  while cart_index < cart.size do
-    current_item = cart
-    if ( find_item_by_name_in_collection( current_item[:item], updated_cart ) == nil)
-      current_item[:count] = 
-      updated_cart.push(current_item)
-    else 
-      increment_count_of_item( updated_cart, current_item[:item] )
-    end 
-    cart_index += 1 
+  hash = {}
+  cart.each do |item_hash|
+    item_hash.each do |name, price_hash|
+      if hash[name].nil?
+        hash[name] = price_hash.merge({:count => 1})
+      else
+        hash[name][:count] += 1
+      end
+    end
   end
-  updated_cart 
+  hash
 end
 
 def apply_coupons(cart, coupons)
-  # Consult README for inputs and outputs
-  #
-  # REMEMBER: This method **should** update cart
-  coupons_index = 
-  
-  while coupons_index < coupons.size do
-        current_coupon = coupons[coupons_index]
-        applicable_for_discount = find_item_by_name_in_collection( current_coupon[:item], cart )
-        if ( applicable_for_discount[:count] / current_coupon[:num] >= 1 )
-        cart.push( {:item => "#{current_coupon[:item]} W/COUPON",
-        :price => (current_coupon[:cost] / current_coupon[:num]).round(2),
-        :clearance => applicable_for_discount[:clearance],
-        :count => applicable_for_discount[:count] - ( applicable_for_discount[:count] % current_coupon[:num])}) 
-        applicable_for_discount[:count] %= current_coupon[:num]
-        
-      end 
-      coupons_index += 1
-    end 
-    cart
+  hash = cart
+  coupons.each do |coupon_hash|
+    # add coupon to cart
+    item = coupon_hash[:item]
+
+    if !hash[item].nil? && hash[item][:count] >= coupon_hash[:num]
+      temp = {"#{item} W/COUPON" => {
+        :price => coupon_hash[:cost],
+        :clearance => hash[item][:clearance],
+        :count => 1
+        }
+      }
+      
+      if hash["#{item} W/COUPON"].nil?
+        hash.merge!(temp)
+      else
+        hash["#{item} W/COUPON"][:count] += 1
+        #hash["#{item} W/COUPON"][:price] += coupon_hash[:cost]
+      end
+      
+      hash[item][:count] -= coupon_hash[:num]
+    end
+  end
+  hash
 end
 
 def apply_clearance(cart)
-  # Consult README for inputs and outputs
-  #
-  # REMEMBER: This method **should** update cart
-    cart_index = 0
-    ready_for_checkout = Array.new
-    
-    while cart_index < cart.size do
-    current_item = cart[cart_index]
-      if ( current_item[:clearance] )
-         current_item[:price] = current_item[:price] - ( current_item[:price] * 0.20 )
-end 
-    ready_for_checkout.push( current_item )
-      cart_index += 1 
-end
- ready_for_checkout
+  cart.each do |item, price_hash|
+    if price_hash[:clearance] == true
+      price_hash[:price] = (price_hash[:price] * 0.8).round(2)
+    end
+  end
+  cart
 end
 
-def checkout(cart, coupons)
-  # Consult README for inputs and outputs
-  #
-  # This method should call
-  # * consolidate_cart
-  # * apply_coupons
-  # * apply_clearance
-  #
-  # BEFORE it begins the work of calculating the total (or else you might have
-  # some irritated customers
+def checkout(items, coupons)
+  cart = consolidate_cart(items)
+  cart1 = apply_coupons(cart, coupons)
+  cart2 = apply_clearance(cart1)
   
-    checkout = consolidate_cart( cart )
-    checkout = apply_coupons( checkout, coupons )
-    checkout = apply_clearance( checkout )
-    
-    index = 0 
-    grand_total = 0
-
-  while index < checkout.size do
-
-    current_item_total = checkout[index][:price] * checkout[index][:count]
-    current_item_total.round(2)
-    grand_total += current_item_total
-    index += 1
+  total = 0
+  
+  cart2.each do |name, price_hash|
+    total += price_hash[:price] * price_hash[:count]
+  end
+  
+  total > 100 ? total * 0.9 : total
+  
 end
-    if ( grand_total > 100 )
-      grand_total *= 0.90
-end 
-grand_total
-end
+
+items =   [
+      {"AVOCADO" => {:price => 3.00, :clearance => true}},
+      {"AVOCADO" => {:price => 3.00, :clearance => true}},
+      {"AVOCADO" => {:price => 3.00, :clearance => true}},
+      {"AVOCADO" => {:price => 3.00, :clearance => true}},
+      {"AVOCADO" => {:price => 3.00, :clearance => true}},
+      {"KALE" => {:price => 3.00, :clearance => false}},
+      {"BLACK_BEANS" => {:price => 2.50, :clearance => false}},
+      {"ALMONDS" => {:price => 9.00, :clearance => false}},
+      {"TEMPEH" => {:price => 3.00, :clearance => true}},
+      {"CHEESE" => {:price => 6.50, :clearance => false}},
+      {"BEER" => {:price => 13.00, :clearance => false}},
+      {"PEANUTBUTTER" => {:price => 3.00, :clearance => true}},
+      {"BEETS" => {:price => 2.50, :clearance => false}},
+      {"SOY MILK" => {:price => 4.50, :clearance => true}}
+    ]
+
+coupons = [
+      {:item => "AVOCADO", :num => 2, :cost => 5.00},
+      {:item => "AVOCADO", :num => 2, :cost => 5.00},
+      {:item => "BEER", :num => 2, :cost => 20.00},
+      {:item => "CHEESE", :num => 2, :cost => 15.00}
+    ]
+
+checkout(items, coupons)
