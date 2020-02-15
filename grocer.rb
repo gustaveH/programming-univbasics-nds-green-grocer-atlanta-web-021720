@@ -19,7 +19,9 @@ def consolidate_cart(cart)
   # REMEMBER: This returns a new Array that represents the cart. Don't merely
   # change `cart` (i.e. mutate) it. It's easier to return a new thing.
   
-  updated_cart = Array.new
+  updated_cart = Array.new 
+    cart_index = 0
+
 
 end
 
