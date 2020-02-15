@@ -28,18 +28,19 @@ def consolidate_cart(cart)
       current_item[:count] = 
       updated_cart.push(current_item)
     else 
-
-
-
-
-
-
+      increment_count_of_item( updated_cart, current_item[:item] )
+    end 
+    cart_index += 1 
+  end
+  updated_cart 
 end
 
 def apply_coupons(cart, coupons)
   # Consult README for inputs and outputs
   #
   # REMEMBER: This method **should** update cart
+  
+  
 end
 
 def apply_clearance(cart)
