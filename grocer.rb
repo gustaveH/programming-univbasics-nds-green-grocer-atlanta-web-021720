@@ -93,5 +93,7 @@ def checkout(cart, coupons)
     index = 0 
     grand_total = 0
 
+  while index < checkout.size do
+
 
 end
