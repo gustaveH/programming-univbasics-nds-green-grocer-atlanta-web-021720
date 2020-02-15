@@ -22,7 +22,10 @@ def consolidate_cart(cart)
       item_name = cart_item[:item]
       
     item_info = find_item_by_name_in_collection(item_name, new_cart)
-          if item_info
+        if item_info
+          item_info[:count] += 1
+        else  
+
 
 
 
