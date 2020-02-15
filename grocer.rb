@@ -65,6 +65,8 @@ def apply_clearance(cart)
     ready_for_checkout = Array.new
     
     while cart_index < cart.size do
+    current_item = cart[cart_index]
+
 
 
 
