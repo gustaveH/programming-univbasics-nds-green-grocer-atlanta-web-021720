@@ -68,7 +68,9 @@ def apply_clearance(cart)
     current_item = cart[cart_index]
       if ( current_item[:clearance] )
          current_item[:price] = current_item[:price] - ( current_item[:price] * 0.20 )
-end
+end 
+    ready_for_checkout.push( current_item )
+
 
 
 
