@@ -97,6 +97,9 @@ def checkout(cart, coupons)
 
     current_item_total = checkout[index][:price] * checkout[index][:count]
     current_item_total.round(2)
+    grand_total += current_item_total
+    index += 1
+end
 
 
 end
