@@ -39,8 +39,11 @@ def apply_coupons(cart, coupons)
   # Consult README for inputs and outputs
   #
   # REMEMBER: This method **should** update cart
-  coupons_index = 0
-    while coupons_index < coupons.size do
+  coupons_index = 
+  
+  while coupons_index < coupons.size do
+        current_coupon = coupons[coupons_index]
+
 
 
   
