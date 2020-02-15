@@ -29,22 +29,19 @@ def consolidate_cart(cart)
           :item => item_name,
           :price => cart_item[:price],
           :clearance => cart_item[:clearance],
-
-
-
-
-
-
-
-
-
-
+          :count => 1
+          }
+        end 
+      end
+      new_cart
 end
 
 def apply_coupons(cart, coupons)
   # Consult README for inputs and outputs
   #
   # REMEMBER: This method **should** update cart
+  
+  
 end
 
 def apply_clearance(cart)
