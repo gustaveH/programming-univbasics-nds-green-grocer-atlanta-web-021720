@@ -41,7 +41,8 @@ def apply_coupons(cart, coupons)
   #
   # REMEMBER: This method **should** update cart
   
-  
+    coupons.each do |coupon|
+
 end
 
 def apply_clearance(cart)
