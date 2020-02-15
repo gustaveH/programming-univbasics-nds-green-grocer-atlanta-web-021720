@@ -67,6 +67,8 @@ def apply_clearance(cart)
   #
   # REMEMBER: This method **should** update cart
     cart.each do |item_info|
+          if item_info[:clearance]
+
 
 end
 
