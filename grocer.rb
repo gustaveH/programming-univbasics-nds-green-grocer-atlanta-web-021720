@@ -21,6 +21,7 @@ def consolidate_cart(cart)
   
   updated_cart = Array.new 
     cart_index = 0
+  while cart_index < cart.size do
 
 
 end
