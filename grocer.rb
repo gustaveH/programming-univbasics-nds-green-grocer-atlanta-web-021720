@@ -40,6 +40,8 @@ def apply_coupons(cart, coupons)
   #
   # REMEMBER: This method **should** update cart
   coupons_index = 0
+    while coupons_index < coupons.size do
+
 
   
 end
