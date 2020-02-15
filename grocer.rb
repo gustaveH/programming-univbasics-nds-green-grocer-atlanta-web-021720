@@ -70,14 +70,9 @@ def apply_clearance(cart)
          current_item[:price] = current_item[:price] - ( current_item[:price] * 0.20 )
 end 
     ready_for_checkout.push( current_item )
-
-
-
-
-
-
-  
-  
+      cart_index += 1 
+end
+ ready_for_checkout
 end
 
 def checkout(cart, coupons)
@@ -90,4 +85,6 @@ def checkout(cart, coupons)
   #
   # BEFORE it begins the work of calculating the total (or else you might have
   # some irritated customers
+  
+  
 end
