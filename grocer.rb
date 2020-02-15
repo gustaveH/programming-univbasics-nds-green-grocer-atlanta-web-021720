@@ -52,24 +52,18 @@ def apply_coupons(cart, coupons)
         applicable_for_discount[:count] %= current_coupon[:num]
         
       end 
-      
-
-
-
-
-
-
-
-
-
-
-  
+      coupons_index += 1
+    end 
+    cart
 end
 
 def apply_clearance(cart)
   # Consult README for inputs and outputs
   #
   # REMEMBER: This method **should** update cart
+  
+  
+  
 end
 
 def checkout(cart, coupons)
